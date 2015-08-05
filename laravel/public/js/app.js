@@ -26,6 +26,9 @@ App.Logic = (function() {
             // Order number was updated, update customer fields
             $('[name="scanOrderNumber"]').on('blur', self._processOrderNumber);
 
+            // Box Code was updated, process it
+            $('[name="BoxCode"]').on('blur', self._processBoxCode);
+
             $('#resetForm').on('click', self._resetForm);
         },
 
@@ -75,6 +78,9 @@ App.Logic = (function() {
                         // Set Cart Values
                         $('[name="CartName"]').val(cart.CartName);
 
+                        // Give the focus to the next form element
+                        $('[name="BoxCode"]').focus();
+
                     // An exception occurred, display error
                     } catch (e) {
                         showErrors(['An error occurred.']);
@@ -85,7 +91,52 @@ App.Logic = (function() {
                     showErrors(['You have entered an invalid value.']);
                 }
             });
-            
+        },
+
+        // Processes an update in the box code field
+        _processBoxCode: function() {
+            // Clear errors
+            showErrors([]);
+
+            // Create selector (more efficient)
+            var boxCode = $('[name="BoxCode"]');
+
+            $.ajax({
+                url: "/api/boxCode/" + $(boxCode).val(),
+                dataType: 'json',
+                success: function(data) {
+                    // Detect Bad data
+                    if (typeof data.type === 'undefined' && !$.isPlainObject(data.type) || $.isEmptyObject(data.type)) {
+                        // Add errors
+                        $(boxCode).closest('form-control').addClass('has-error');
+                        showErrors(['You have entered an invalid box code.']);
+
+                        return;
+                    }
+
+                    try {
+                        // Set Order
+                        var type = data.type;
+
+                        // Set Values
+                        $('[name="Length"]').val(type.Length);
+                        $('[name="Width"]').val(type.Width);
+                        $('[name="Height"]').val(type.Height);
+
+                        // Switch to next element
+                        $('[name="Weight"]').focus();
+
+
+                    // An exception occurred, display error
+                    } catch (e) {
+                        showErrors(['An error occurred.']);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    $(boxCode).closest('form-control').addClass('has-error');
+                    showErrors(['You have entered an invalid value.']);
+                }
+            });
         }
     };
 

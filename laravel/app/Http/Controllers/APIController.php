@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-use App\Order, App\ShoppingCart;
+use App\Order, App\ShoppingCart, App\BoxType;
 
 class APIController extends Controller {
     // Fetches information about an order
@@ -20,5 +20,12 @@ class APIController extends Controller {
 
         // Returns as JSON object
         return $return;
+    }
+
+    // Fetches box code information
+    public function do_boxCode($code) {
+        return array(
+            'type' => BoxType::code($code),
+        );
     }
 }

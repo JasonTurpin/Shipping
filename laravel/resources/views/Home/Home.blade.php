@@ -159,34 +159,34 @@
             </div>
             <div class="panel-body">
               <div class="form-group input-group input-group-lg">
-                <input type="text" class="form-control input-lg" placeholder="Box">
+                <input type="text" class="form-control input-lg" placeholder="Box" name="BoxCode">
                 <span class="input-group-btn">
                   <button class="btn btn-success btn-lg">Lookup</button>
                 </span>
               </div>
               <div class="row form-group">
                 <div class="col-xs-4">
-                  <input type="text" class="form-control input-lg" placeholder="Length" disabled>
+                  <input type="text" class="form-control input-lg" placeholder="Length" name="Length" disabled>
                 </div>
                 <div class="col-xs-4">
-                  <input type="text" class="form-control input-lg" placeholder="Width" disabled>
+                  <input type="text" class="form-control input-lg" placeholder="Width" name="Width" disabled>
                 </div>
                 <div class="col-xs-4">
-                  <input type="text" class="form-control input-lg" placeholder="Height" disabled>
+                  <input type="text" class="form-control input-lg" placeholder="Height" name="Height" disabled>
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control input-lg" placeholder="Weight (lbs)">
+                <input type="text" class="form-control input-lg" name="Weight" placeholder="Weight (lbs)">
               </div>
               <div class="row form-group">
                 <div class="col-xs-4">
-                  <input type="text" class="form-control input-lg" placeholder="Picker">
+                  <input type="text" class="form-control input-lg" name="Picker" placeholder="Picker">
                 </div>
                 <div class="col-xs-4">
-                  <input type="text" class="form-control input-lg" placeholder="Packer">
+                  <input type="text" class="form-control input-lg" name="Packer" placeholder="Packer">
                 </div>
                 <div class="col-xs-4">
-                  <input type="text" class="form-control input-lg" placeholder="Num. of Trees">
+                  <input type="text" class="form-control input-lg" name="NumTrees" placeholder="Num. of Trees">
                 </div>
               </div>
             </div>

@@ -16,6 +16,11 @@ class BoxType extends Model {
      * @var string
      */
     protected $primaryKey = 'BoxCode';
+
+    // Source Order Number Condition
+    public function scopeCode($query, $code) {
+        return $query->where('BoxCode', '=', $code)->first();
+    }
 }
 /*
 +------------+-------------+------+-----+---------------------+-----------------------------+
