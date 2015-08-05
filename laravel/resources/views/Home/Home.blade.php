@@ -22,10 +22,10 @@
   <body>
     <div class="container">
 
-      <div class="row hoffa">
-        <div class="alert alert-warning alert-dismissible" role="alert">
+      <div class="row hoffa" id="errorContainer">
+        <div class="alert alert-danger alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <span class="glyphicon glyphicon-warning-sign"></span> <strong>Warning!</strong> This is a placeholder for alerts.
+          <ul id="errorMessages"></ul>
         </div>
       </div>
 

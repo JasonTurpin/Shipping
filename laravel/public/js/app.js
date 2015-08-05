@@ -8,20 +8,42 @@ App.Logic = (function() {
         init: function() {
             var self = this;
 
+            // Removes all error classes
+            $('.has-error :text').on('keydown', function() {
+                $(this).closest('.form-group').removeClass('has-error');
+            });
+
+            // Removes error class on radio button click
+            $('.has-error :radio').on('click', function() {
+                $(this).closest('.form-group').removeClass('has-error');
+            });
+
+            // Remove error classes on select boxes on change
+            $('.has-error select').on('change', function() {
+                $(this).closest('.form-group').removeClass('has-error');
+            });
+
             // Order number was updated, update customer fields
             $('[name="scanOrderNumber"]').on('blur', self._processOrderNumber);
         },
 
         // Sends the AJAX call processing the order numer
         _processOrderNumber: function() {
+            // Clear errors
+            showErrors([]);
+
+            // Create selector (more efficient)
+            var orderNumSel = $('[name="scanOrderNumber"]');
+
             $.ajax({
-                url: "/api/orderInfo/" + $('[name="scanOrderNumber"]').val(),
+                url: "/api/orderInfo/" + $(orderNumSel).val(),
                 dataType: 'json',
                 success: function(data) {
                     // Detect Bad data
                     if (typeof data.order === 'undefined' && !$.isPlainObject(data.order) || $.isEmptyObject(data.order)) {
-                        // @todo replace with an error message
-                        console.log('bad data');
+                        // Add errors
+                        $(orderNumSel).closest('form-control').addClass('has-error');
+                        showErrors(['You have entered an invalid value.']);
 
                         return;
                     }
@@ -47,13 +69,12 @@ App.Logic = (function() {
 
                     // An exception occurred, display error
                     } catch (e) {
-                        // @todo convert to error message
-                        console.log('an error occurred');
+                        showErrors(['An error occurred.']);
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    // @todo display an error
-                    console.log('an error occurred');
+                    $(orderNumSel).closest('form-control').addClass('has-error');
+                    showErrors(['You have entered an invalid value.']);
                 }
             });
             
@@ -65,3 +86,21 @@ App.Logic = (function() {
     });
     return obj;
 }());
+
+// Displays error messaging
+function showErrors(errorMsgs) {
+    var html = '';
+
+    $.each(errorMsgs, function(dontCare, value) {
+        html += '<li>' + value + '</li>';
+    });
+
+    // Display error messages
+    $('#errorMessages').html(html);
+    
+    if (html !== '') {
+        $('#errorContainer').removeClass('hoffa');
+    } else {
+        $('#errorContainer').addClass('hoffa');
+    }
+}
