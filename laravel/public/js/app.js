@@ -25,6 +25,14 @@ App.Logic = (function() {
 
             // Order number was updated, update customer fields
             $('[name="scanOrderNumber"]').on('blur', self._processOrderNumber);
+
+            $('#resetForm').on('click', self._resetForm);
+        },
+
+        // Reset form values
+        _resetForm: function() {
+            $('input:text').val('');
+            $('select').val('default');
         },
 
         // Sends the AJAX call processing the order numer

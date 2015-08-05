@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-xs-3">
                   <select class="form-control input-lg" id="state" name="ShipState" disabled>
-                      <option value="">State</option>
+                      <option value="default">State</option>
                     	<option value="AL">AL</option>
                     	<option value="AK">AK</option>
                     	<option value="AZ">AZ</option>
@@ -221,7 +221,7 @@
 
       <div class="row">
         <div class="col-md-2">
-          <button type="button" class="btn btn-warning btn-lg btn-block"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset Form</button>
+          <button type="button" class="btn btn-warning btn-lg btn-block" id="resetForm"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> Reset Form</button>
         </div>
 
         <div class="col-md-6 col-md-offset-4">
