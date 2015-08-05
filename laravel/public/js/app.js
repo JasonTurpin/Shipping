@@ -29,7 +29,77 @@ App.Logic = (function() {
             // Box Code was updated, process it
             $('[name="BoxCode"]').on('blur', self._processBoxCode);
 
+            // reset the form
             $('#resetForm').on('click', self._resetForm);
+
+            // Refresh the shipping rates
+            $('#refreshRates').on('click', self._refreshRates);
+
+            // Disable the enter key for form submits
+            $('#formContainer').on('keyup keypress', function(e) {
+                var code = e.keyCode || e.which;
+                if (code === 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        },
+
+        // Refresh the shipping rates
+        _refreshRates: function() {
+            // Clear errors
+            showErrors([]);
+
+            var postData = {
+                '_token'      : $('[name="_token"]').val(),
+                'Length'      : $('[name="Length"]').val(),
+                'Width'       : $('[name="Width"]').val(),
+                'Height'      : $('[name="Height"]').val(),
+                'Weight'      : $('[name="Weight"]').val(),
+                'Packer'      : $('[name="Packer"]').val(),
+                'NumTrees'    : $('[name="NumTrees"]').val(),
+                'ShipName'    : $('[name="ShipName"]').val(),
+                'ShipAddress' : $('[name="ShipAddress"]').val(),
+                'ShipAddress2': $('[name="ShipAddress2"]').val(),
+                'ShipCity'    : $('[name="ShipCity"]').val(),
+                'ShipState'   : $('[name="ShipState"]').val(),
+                'ShipZip'     : $('[name="ShipZip"]').val(),
+                'Phone'       : $('[name="Phone"]').val()
+            };
+
+            // Send Ajax
+            $.ajax({
+                url: "/api/refreshRates",
+                type: 'POST',
+                data: postData,
+                dataType: 'json',
+                success: function(data) {
+                    // @todo provide positive user feedback
+                    console.log(data);
+
+                    // Detect Bad data
+                    if (typeof data.errorFields !== 'undefined' && data.errorFields.length > 0) {
+                        $(data.errorFields).each(function(dontCare, value) {
+                            $('[name="value"]').closest('.form-group').addClass('has-error');
+                        });
+
+                        showErrors(['Required fields are missing.']);
+
+                        return;
+                    }
+
+                    try {
+
+                    // An exception occurred, display error
+                    } catch (e) {
+                        showErrors(['An error occurred.']);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    showErrors(['An error occurred.']);
+                }
+            });
+            
         },
 
         // Reset form values
@@ -53,7 +123,7 @@ App.Logic = (function() {
                     // Detect Bad data
                     if (typeof data.order === 'undefined' && !$.isPlainObject(data.order) || $.isEmptyObject(data.order)) {
                         // Add errors
-                        $(orderNumSel).closest('form-control').addClass('has-error');
+                        $(orderNumSel).closest('.form-group').addClass('has-error');
                         showErrors(['You have entered an invalid value.']);
 
                         return;
@@ -87,7 +157,7 @@ App.Logic = (function() {
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    $(orderNumSel).closest('form-control').addClass('has-error');
+                    $(orderNumSel).closest('.form-group').addClass('has-error');
                     showErrors(['You have entered an invalid value.']);
                 }
             });
@@ -108,7 +178,7 @@ App.Logic = (function() {
                     // Detect Bad data
                     if (typeof data.type === 'undefined' && !$.isPlainObject(data.type) || $.isEmptyObject(data.type)) {
                         // Add errors
-                        $(boxCode).closest('form-control').addClass('has-error');
+                        $(boxCode).closest('.form-group').addClass('has-error');
                         showErrors(['You have entered an invalid box code.']);
 
                         return;
@@ -133,7 +203,7 @@ App.Logic = (function() {
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    $(boxCode).closest('form-control').addClass('has-error');
+                    $(boxCode).closest('.form-group').addClass('has-error');
                     showErrors(['You have entered an invalid value.']);
                 }
             });
@@ -146,7 +216,7 @@ App.Logic = (function() {
     return obj;
 }());
 
-// Displays error messaging
+// Displays error messagingf
 function showErrors(errorMsgs) {
     var html = '';
 

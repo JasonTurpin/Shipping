@@ -21,7 +21,6 @@
   </head>
   <body>
     <div class="container">
-
       <div class="row hoffa" id="errorContainer">
         <div class="alert alert-danger alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -131,7 +130,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control input-lg" name="phone" placeholder="Phone" disabled>
+                <input type="text" class="form-control input-lg" name="Phone" placeholder="Phone" disabled>
               </div>
             </div>
           </div>
@@ -147,7 +146,7 @@
               <div class="input-group input-group-lg">
                 <input type="text" class="form-control input-lg" placeholder="Scan Order Number" name="scanOrderNumber" />
                 <span class="input-group-btn">
-                  <button class="btn btn-success btn-lg" data-loading-text="Searching...">Lookup</button>
+                  <button type="button" class="btn btn-success btn-lg" data-loading-text="Searching...">Lookup</button>
                 </span>
               </div>
             </div>
@@ -157,11 +156,11 @@
             <div class="panel-heading">
               <h3 class="panel-title">Package Details</h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body packageDetails">
               <div class="form-group input-group input-group-lg">
                 <input type="text" class="form-control input-lg" placeholder="Box" name="BoxCode">
                 <span class="input-group-btn">
-                  <button class="btn btn-success btn-lg">Lookup</button>
+                  <button type="button" class="btn btn-success btn-lg">Lookup</button>
                 </span>
               </div>
               <div class="row form-group">
@@ -196,15 +195,11 @@
             <div class="panel-heading clearfix">
               <h3 class="panel-title pull-left" style="padding-top: 7.5px;">Shipping Details</h3>
               <div class="btn-group pull-right">
-                <button type="button" class="btn btn-warning" disabled><span class="glyphicon glyphicon-download-alt"></span> Refresh Rates</button>
-                <button type="button" class="btn btn-primary" disabled>Edit</button>
+                <button type="button" class="btn btn-warning" id="refreshRates"><span class="glyphicon glyphicon-download-alt"></span> Refresh Rates</button>
               </div>
             </div>
             <div class="panel-body">
               <div class="btn-group btn-block">
-                <button class="btn btn-default btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                  Recipient and Package Details Required  <span class="caret"></span>
-                </button>
                 <ul class="dropdown-menu">
                   <!--
                   List items of available shipping methods...
@@ -228,7 +223,7 @@
           <button type="button" class="btn btn-success btn-lg btn-block" disabled>Print Shipping Label</button>
         </div>
       </div>
-
+        <input type="hidden" name="_token" value="{{{ csrf_token() }}}">
     </div><!-- /.container -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -194,4 +194,13 @@ return [
 
     ],
 
+    // From Address Constants
+    'fromCompany' => env('FROM_COMPANY', 'from address constant'),
+    'fromStreet1' => env('FROM_STREET', 'from address constant'),
+    'fromCity'    => env('FROM_CITY', 'from address constant'),
+    'fromState'   => env('FROM_STATE', 'from address constant'),
+    'fromZip'     => env('FROM_ZIP', 'from address constant'),
+
+    // Easy Post API Key
+    'easyPostAPIKey'     => env('EASYPOST_API_KEY', 'api key'),
 ];
