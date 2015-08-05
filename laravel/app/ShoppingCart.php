@@ -11,6 +11,13 @@ class ShoppingCart extends Model {
     protected $table = 'ShoppingCarts';
 
     /**
+     * Hidden fields we do not want exported to JSON
+     *
+     * @var string
+     */
+    protected $hidden = ['Password', 'ServerPwd'];
+
+    /**
      * Primary key
      *
      * @var string

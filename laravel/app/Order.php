@@ -16,6 +16,16 @@ class Order extends Model {
      * @var string
      */
     protected $primaryKey = 'OrderNumber';
+
+    // Source Order Number Condition
+    public function scopeSourceOrderNumber($query, $sourceOrderNumber) {
+        return $query->where('SourceOrderNumber', '=', $sourceOrderNumber)->first();
+    }
+
+    // Creates relationship with shopping cart
+    public function cart() {
+        return $this->hasOne('App\ShoppingCart', 'ID', 'CartID');
+    }
 }
 /*
 +-----------------------+------------------+------+-----+---------------------+-----------------------------+
@@ -131,5 +141,4 @@ class Order extends Model {
 | created_at            | timestamp        | NO   |     | CURRENT_TIMESTAMP   | on update CURRENT_TIMESTAMP |
 | updated_at            | timestamp        | NO   |     | 0000-00-00 00:00:00 |                             |
 +-----------------------+------------------+------+-----+---------------------+-----------------------------+
-
 */

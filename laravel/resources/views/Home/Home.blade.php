@@ -22,7 +22,7 @@
   <body>
     <div class="container">
 
-      <div clas="row">
+      <div class="row hoffa">
         <div class="alert alert-warning alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <span class="glyphicon glyphicon-warning-sign"></span> <strong>Warning!</strong> This is a placeholder for alerts.
@@ -38,15 +38,14 @@
               <h3 class="panel-title">Sales Channel</h3>
             </div>
             <div class="panel-body">
-              <div class="btn-group btn-block">
-                <button class="btn btn-default btn-lg btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
-                  Select a Sales Channel...  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#" data-cart-id="1">BrighterBlooms.com</a></li>
-                  <li><a href="#" data-cart-id="2">Fast-Growing-Trees.com</a></li>
-                </ul>
-              </div>
+                <div class="form-group">
+                    <select class="form-control input-lg" name="CartName" disabled>
+                      <option value="default">-- Select A Channel--</option>
+                      <option value="Brighter Blooms">Brighter Blooms</option>
+                      <option value="Fast Growing Trees">Fast Growing Trees</option>
+                      <option value="Third Cart">Third Cart</option>
+                  </select>
+                </div>
             </div>
           </div>
 
@@ -59,20 +58,20 @@
             </div>
             <div class="panel-body">
               <div class="form-group">
-                <input type="text" class="form-control input-lg" placeholder="Full Name" disabled>
+                <input type="text" class="form-control input-lg" name="ShipName" placeholder="Full Name" disabled>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control input-lg" placeholder="Address 1" disabled>
+                <input type="text" class="form-control input-lg" name="ShipAddress" placeholder="Address 1" disabled>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control input-lg" placeholder="Address 2" disabled>
+                <input type="text" class="form-control input-lg" name="ShipAddress2" placeholder="Address 2" disabled>
               </div>
               <div class="row form-group">
                 <div class="col-xs-6">
-                  <input type="text" class="form-control input-lg" placeholder="City" disabled>
+                  <input type="text" class="form-control input-lg" name="ShipCity" placeholder="City" disabled>
                 </div>
                 <div class="col-xs-3">
-                  <select class="form-control input-lg" id="state" name="state" disabled>
+                  <select class="form-control input-lg" id="state" name="ShipState" disabled>
                       <option value="">State</option>
                     	<option value="AL">AL</option>
                     	<option value="AK">AK</option>
@@ -128,11 +127,11 @@
                   </select>
                 </div>
                 <div class="col-xs-3">
-                  <input type="text" class="form-control input-lg" placeholder="Zip Code" disabled>
+                  <input type="text" class="form-control input-lg" name="ShipZip" placeholder="Zip Code" disabled>
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control input-lg" placeholder="Phone" disabled>
+                <input type="text" class="form-control input-lg" name="phone" placeholder="Phone" disabled>
               </div>
             </div>
           </div>
@@ -146,7 +145,7 @@
             </div>
             <div class="panel-body">
               <div class="input-group input-group-lg">
-                <input type="text" class="form-control input-lg" placeholder="Scan Order Number">
+                <input type="text" class="form-control input-lg" placeholder="Scan Order Number" name="scanOrderNumber" />
                 <span class="input-group-btn">
                   <button class="btn btn-success btn-lg" data-loading-text="Searching...">Lookup</button>
                 </span>
